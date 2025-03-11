@@ -34,16 +34,29 @@ function criaElemento() {
     let li = document.createElement('li');
     let inputCheckbox = document.createElement('input');
     let inputText = document.createElement('input');
-    
+    let btnSalvar = document.createElement('button');
+    let btnExcluir = document.createElement('button');
+    let btnEditar = document.createElement('button');
+    let btnCancelar = document.createElement('button');
+
     inputCheckbox.setAttribute('type', 'checkbox');
     inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída');
     inputText.setAttribute('type', 'text');
     inputText.setAttribute('disabled', 'true');
-
     inputText.value = taskInput.value;
+    
+    btnSalvar.classList.add('hidden');
+    btnCancelar.classList.add('hidden');
+
+    btnSalvar.innerHTML = 'Salvar';
+    btnEditar.innerHTML = 'Editar';
+    btnExcluir.innerHTML = 'Excluir';
+    btnCancelar.innerHTML = 'Cancelar';
 
     li.appendChild(inputCheckbox);
     li.appendChild(inputText);
+    li.appendChild(btnEditar);
+    li.appendChild(btnExcluir);
     ulList.appendChild(li);
 }
 
