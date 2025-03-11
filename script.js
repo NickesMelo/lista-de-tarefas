@@ -11,6 +11,7 @@ function init() {
 
 function openModal() {
     modal.classList.add('visible')
+    taskInput.focus();
 }
 
 function closeModal() {
@@ -43,7 +44,8 @@ function criaElemento() {
     inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída');
     inputText.setAttribute('type', 'text');
     inputText.setAttribute('disabled', 'true');
-    inputText.value = taskInput.value;
+
+    inputText.value = capitalizeFirstlLetter(taskInput.value)
     
     btnSalvar.classList.add('hidden');
     btnCancelar.classList.add('hidden');
@@ -58,6 +60,10 @@ function criaElemento() {
     li.appendChild(btnEditar);
     li.appendChild(btnExcluir);
     ulList.appendChild(li);
+}
+
+function capitalizeFirstlLetter(value) {
+    return String(value).charAt(0).toUpperCase() + String(value).slice(1);
 }
 
 document.addEventListener("click", function(event) {
