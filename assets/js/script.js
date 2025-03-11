@@ -1,8 +1,8 @@
 const ulList = document.querySelector('#task-list-ul');
 const btnAdd = document.querySelector('#btn-add');
 const taskInput = document.querySelector('#task-input');
-const btnSalvarTarefa = document.querySelector('#btn-salvar-tarefa');
-const btnFecharTarefa = document.querySelector('#btn-fechar-modal');
+const btnSaveTask = document.querySelector('#btn-save-task');
+const btnCloseTask = document.querySelector('#btn-close-modal');
 const modal = document.querySelector('#modal'); 
 
 function init() {
@@ -18,18 +18,18 @@ function closeModal() {
     modal.classList.remove('visible');
 }
 
-function salvarTarefa() {
+function saveTask() {
     if (taskInput.value.trim() === '') {
         alert('Informe uma tarefa');
         return;
     } else {
-        criaElemento();
+        createNewElement();
         taskInput.value = '';
         closeModal();
     }
 }
 
-function criaElemento() {
+function createNewElement() {
     let li = document.createElement('li');
     let inputCheckbox = document.createElement('input');
     let inputText = document.createElement('input');
@@ -63,15 +63,15 @@ function criaElemento() {
     ulList.appendChild(li);
 
     btnEditar.addEventListener("click", function () {
-        editarSalvarTarefa(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
     });
 
     btnSalvar.addEventListener("click", function () {
-        editarSalvarTarefa(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
     });
 
     btnCancelar.addEventListener("click", function () {
-        editarSalvarTarefa(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
     });
 
     btnExcluir.addEventListener("click", function () {
@@ -79,7 +79,7 @@ function criaElemento() {
     });
 }
 
-function editarSalvarTarefa(btnEditar, btnSalvar, btnCancelar, btnExcluir) {
+function editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir) {
     if (btnEditar.classList.contains('hidden')) {
         // Volta ao modo normal: mostra Editar e Excluir, esconde Salvar e Cancelar
         btnSalvar.classList.add('hidden');
@@ -109,10 +109,10 @@ btnAdd.addEventListener("click", function() {
     init();
 });
 
-btnFecharTarefa.addEventListener("click", function () {
+btnCloseTask.addEventListener("click", function () {
     closeModal();
 });
 
-btnSalvarTarefa.addEventListener("click", function() {
-    salvarTarefa();
+btnSaveTask.addEventListener("click", function() {
+    saveTask();
 });

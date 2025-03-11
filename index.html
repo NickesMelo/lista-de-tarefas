@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Estudo full-stack</title>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Gestor de Tarefas</title>
 </head>
+
 <body>
-    <h1>Lista de tarefas</h1>
     <div id="containter-general">
-        <!-- Modal para add nova tarefa-->
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <input type="text" id="task-input" placeholder="Digite a tarefa" aria-label="Digite a tarefa">
-                <button id="btn-salvar-tarefa" aria-label="Salvar a nova tarefa">Salvar</button>
-                <button id="btn-fechar-modal" aria-label="Cancelar a nova tarefa">Cancelar</button>
-            </div>
-        </div>
-        <!-- Lista de Tarefas -->
-        <div class="container-buttons">
-            <button type="button" id="btn-add" aria-label="Adicionar nova tarefa">Adicionar</button>
-        </div>
-        <div class="container-lists">
-            <ul id="task-list-ul"></ul>
-        </div>
+        <header>
+            <h1>Lista de tarefas</h1>
+        </header>
+        <main>
+            <section id="section-modal">
+                <!-- Modal -->
+                <div id="modal-containter-general">
+                    <div class="modal" id="modal">
+                        <div class="modal-content">
+                            <input type="text" id="task-input" placeholder="Digite a tarefa"
+                                aria-label="Digite a tarefa">
+                            <button id="btn-save-task" aria-label="Salvar a nova tarefa">Salvar</button>
+                            <button id="btn-close-modal" aria-label="Cancelar a nova tarefa">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="section-list">
+                <!-- To do list -->
+                <div class="container-buttons">
+                    <button type="button" id="btn-add" aria-label="Adicionar nova tarefa">Adicionar</button>
+                </div>
+                <div class="container-lists">
+                    <ul id="task-list-ul"></ul>
+                </div>
+            </section>
+        </main>
     </div>
-    <script src="script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
