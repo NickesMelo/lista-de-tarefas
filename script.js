@@ -47,6 +47,11 @@ function criaElemento() {
     ulList.appendChild(li);
 }
 
+document.addEventListener("click", function(event) {
+    if (modal.classList.contains('visible') && !modal.contains(event.target) && event.target !== btnAdd) {
+        closeModal();
+    }
+});
 btnAdd.addEventListener("click", function() {
     init();
 });
