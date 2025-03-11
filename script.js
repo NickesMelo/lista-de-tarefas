@@ -5,6 +5,11 @@ const btnSalvarTarefa = document.querySelector('#btn-salvar-tarefa');
 const btnFecharTarefa = document.querySelector('#btn-fechar-modal');
 const modal = document.querySelector('#modal'); 
 
+let btnSalvar = document.createElement('button');
+let btnExcluir = document.createElement('button');
+let btnEditar = document.createElement('button');
+let btnCancelar = document.createElement('button');
+
 function init() {
     openModal();
 }
@@ -35,10 +40,7 @@ function criaElemento() {
     let li = document.createElement('li');
     let inputCheckbox = document.createElement('input');
     let inputText = document.createElement('input');
-    let btnSalvar = document.createElement('button');
-    let btnExcluir = document.createElement('button');
-    let btnEditar = document.createElement('button');
-    let btnCancelar = document.createElement('button');
+    
 
     inputCheckbox.setAttribute('type', 'checkbox');
     inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída');
@@ -74,8 +76,7 @@ document.addEventListener("click", function(event) {
 btnAdd.addEventListener("click", function() {
     init();
 });
-btnFecharTarefa.addEventListener("click", function (event) {
-    event.preventDefault();
+btnFecharTarefa.addEventListener("click", function () {
     closeModal();
 });
 btnSalvarTarefa.addEventListener("click", function() {
