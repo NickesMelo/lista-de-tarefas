@@ -46,8 +46,11 @@ function createNewElement() {
     let btnEditar = document.createElement('button');
     let btnCancelar = document.createElement('button');
 
-    btnSalvar.classList.add('hidden');
-    btnCancelar.classList.add('hidden');
+    btnSalvar.classList.add('hidden', 'background-green');
+    btnCancelar.classList.add('hidden', 'background-yellow');
+
+    btnEditar.classList.add('background-green');
+    btnExcluir.classList.add('background-red')
 
     btnSalvar.innerHTML = 'Salvar';
     btnEditar.innerHTML = 'Editar';
