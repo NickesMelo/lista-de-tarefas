@@ -41,60 +41,60 @@ function createNewElement() {
 
     inputText.value = capitalizeFirstLetter(taskInput.value);
 
-    let btnSalvar = document.createElement('button');
-    let btnExcluir = document.createElement('button');
-    let btnEditar = document.createElement('button');
-    let btnCancelar = document.createElement('button');
+    let btnSave = document.createElement('button');
+    let btnDelete = document.createElement('button');
+    let btnEdit = document.createElement('button');
+    let btnCancel = document.createElement('button');
 
-    btnSalvar.classList.add('hidden', 'background-green');
-    btnCancelar.classList.add('hidden', 'background-yellow');
+    btnSave.classList.add('hidden', 'background-green');
+    btnCancel.classList.add('hidden', 'background-yellow');
 
-    btnEditar.classList.add('background-green');
-    btnExcluir.classList.add('background-red')
+    btnEdit.classList.add('background-green');
+    btnDelete.classList.add('background-red')
 
-    btnSalvar.innerHTML = 'Salvar';
-    btnEditar.innerHTML = 'Editar';
-    btnExcluir.innerHTML = 'Excluir';
-    btnCancelar.innerHTML = 'Cancelar';
+    btnSave.innerHTML = 'Salvar';
+    btnEdit.innerHTML = 'Editar';
+    btnDelete.innerHTML = 'Excluir';
+    btnCancel.innerHTML = 'Cancelar';
 
     li.appendChild(inputCheckbox);
     li.appendChild(inputText);
-    li.appendChild(btnEditar);
-    li.appendChild(btnExcluir);
-    li.appendChild(btnSalvar);
-    li.appendChild(btnCancelar);
+    li.appendChild(btnEdit);
+    li.appendChild(btnDelete);
+    li.appendChild(btnSave);
+    li.appendChild(btnCancel);
     ulList.appendChild(li);
 
-    btnEditar.addEventListener("click", function () {
-        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+    btnEdit.addEventListener("click", function () {
+        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
     });
 
-    btnSalvar.addEventListener("click", function () {
-        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+    btnSave.addEventListener("click", function () {
+        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
     });
 
-    btnCancelar.addEventListener("click", function () {
-        editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir);
+    btnCancel.addEventListener("click", function () {
+        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
     });
 
-    btnExcluir.addEventListener("click", function () {
+    btnDelete.addEventListener("click", function () {
         ulList.removeChild(li);
     });
 }
 
-function editSaveTask(btnEditar, btnSalvar, btnCancelar, btnExcluir) {
-    if (btnEditar.classList.contains('hidden')) {
+function editSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
+    if (btnEdit.classList.contains('hidden')) {
         // Volta ao modo normal: mostra Editar e Excluir, esconde Salvar e Cancelar
-        btnSalvar.classList.add('hidden');
-        btnCancelar.classList.add('hidden');
-        btnEditar.classList.remove('hidden');
-        btnExcluir.classList.remove('hidden');
+        btnSave.classList.add('hidden');
+        btnCancel.classList.add('hidden');
+        btnEdit.classList.remove('hidden');
+        btnDelete.classList.remove('hidden');
     } else {
         // Modo de edição: esconde Editar e Excluir, mostra Salvar e Cancelar
-        btnEditar.classList.add('hidden');
-        btnExcluir.classList.add('hidden');
-        btnSalvar.classList.remove('hidden');
-        btnCancelar.classList.remove('hidden');
+        btnEdit.classList.add('hidden');
+        btnDelete.classList.add('hidden');
+        btnSave.classList.remove('hidden');
+        btnCancel.classList.remove('hidden');
     }
 }
 
