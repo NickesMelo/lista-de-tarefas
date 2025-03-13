@@ -1,15 +1,15 @@
-const ulList = document.querySelector('#task-list-ul');
-const btnAdd = document.querySelector('#btn-add');
+const taskListContainer = document.querySelector('#task-list-ul');
+const btnAddTask = document.querySelector('#btn-add');
 const taskInput = document.querySelector('#task-input');
-const btnSaveTask = document.querySelector('#btn-save-task');
-const btnCloseTask = document.querySelector('#btn-close-modal');
-const modal = document.querySelector('#modal'); 
+const btnSave = document.querySelector('#btn-save-task');
+const btnCloseModal = document.querySelector('#btn-close-modal');
+const modal = document.querySelector('#modal');
 
-function init() {
-    openModal();
+function initializeTaskApp() {
+    showTaskModal();
 }
 
-function openModal() {
+function showTaskModal() {
     modal.classList.add('visible');
     taskInput.focus();
 }
@@ -23,13 +23,13 @@ function saveTask() {
         alert('Informe uma tarefa');
         return;
     } else {
-        createNewElement();
+        createTaskElement();
         taskInput.value = '';
         closeModal();
     }
 }
 
-function createNewElement() {
+function createTaskElement() {
     let li = document.createElement('li');
     let inputCheckbox = document.createElement('input');
     let inputText = document.createElement('input');
@@ -41,18 +41,18 @@ function createNewElement() {
 
     inputText.value = capitalizeFirstLetter(taskInput.value);
 
-    let btnSave = document.createElement('button');
+    let btnSaveTask = document.createElement('button');  // Renomeado para evitar conflito
     let btnDelete = document.createElement('button');
     let btnEdit = document.createElement('button');
     let btnCancel = document.createElement('button');
 
-    btnSave.classList.add('hidden', 'background-green');
+    btnSaveTask.classList.add('hidden', 'background-green');
     btnCancel.classList.add('hidden', 'background-yellow');
 
     btnEdit.classList.add('background-green');
-    btnDelete.classList.add('background-red')
+    btnDelete.classList.add('background-red');
 
-    btnSave.innerHTML = 'Salvar';
+    btnSaveTask.innerHTML = 'Salvar';
     btnEdit.innerHTML = 'Editar';
     btnDelete.innerHTML = 'Excluir';
     btnCancel.innerHTML = 'Cancelar';
@@ -61,28 +61,28 @@ function createNewElement() {
     li.appendChild(inputText);
     li.appendChild(btnEdit);
     li.appendChild(btnDelete);
-    li.appendChild(btnSave);
+    li.appendChild(btnSaveTask);
     li.appendChild(btnCancel);
-    ulList.appendChild(li);
+    taskListContainer.appendChild(li);
 
     btnEdit.addEventListener("click", function () {
-        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
-    btnSave.addEventListener("click", function () {
-        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+    btnSaveTask.addEventListener("click", function () {
+        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
     btnCancel.addEventListener("click", function () {
-        editSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
     btnDelete.addEventListener("click", function () {
-        ulList.removeChild(li);
+        taskListContainer.removeChild(li);
     });
 }
 
-function editSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
+function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
     if (btnEdit.classList.contains('hidden')) {
         // Volta ao modo normal: mostra Editar e Excluir, esconde Salvar e Cancelar
         btnSave.classList.add('hidden');
@@ -102,20 +102,20 @@ function capitalizeFirstLetter(value) {
     return String(value).charAt(0).toUpperCase() + String(value).slice(1);
 }
 
-document.addEventListener("click", function(event) {
-    if (modal.classList.contains('visible') && !modal.contains(event.target) && event.target !== btnAdd) {
+document.addEventListener("click", function (event) {
+    if (modal.classList.contains('visible') && !modal.contains(event.target) && event.target !== btnAddTask) {
         closeModal();
     }
 });
 
-btnAdd.addEventListener("click", function() {
-    init();
+btnAddTask.addEventListener("click", function () {
+    initializeTaskApp();
 });
 
-btnCloseTask.addEventListener("click", function () {
+btnCloseModal.addEventListener("click", function () {
     closeModal();
 });
 
-btnSaveTask.addEventListener("click", function() {
+btnSave.addEventListener("click", function () {
     saveTask();
 });
