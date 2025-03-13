@@ -30,7 +30,7 @@ body {
 
 /* Estrutura principal */
 #container-general {
-    min-width: 30vw;
+    min-width: 40vw;
     min-height: 600px;
     background-color: white;
     border-radius: var(--border-radius);

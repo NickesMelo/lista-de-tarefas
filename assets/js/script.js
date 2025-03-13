@@ -41,7 +41,7 @@ function createTaskElement() {
 
     inputText.value = capitalizeFirstLetter(taskInput.value);
 
-    let btnSaveTask = document.createElement('button');  // Renomeado para evitar conflito
+    let btnSaveTask = document.createElement('button');
     let btnDelete = document.createElement('button');
     let btnEdit = document.createElement('button');
     let btnCancel = document.createElement('button');
@@ -66,14 +66,17 @@ function createTaskElement() {
     taskListContainer.appendChild(li);
 
     btnEdit.addEventListener("click", function () {
+        toggleInputState(inputText, false);
         toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
     btnSaveTask.addEventListener("click", function () {
+        toggleInputState(inputText, true);
         toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
     btnCancel.addEventListener("click", function () {
+        toggleInputState(inputText, true);
         toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
     });
 
@@ -82,15 +85,13 @@ function createTaskElement() {
     });
 }
 
-function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
+function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete, inputText) {
     if (btnEdit.classList.contains('hidden')) {
-        // Volta ao modo normal: mostra Editar e Excluir, esconde Salvar e Cancelar
         btnSave.classList.add('hidden');
         btnCancel.classList.add('hidden');
         btnEdit.classList.remove('hidden');
         btnDelete.classList.remove('hidden');
     } else {
-        // Modo de edição: esconde Editar e Excluir, mostra Salvar e Cancelar
         btnEdit.classList.add('hidden');
         btnDelete.classList.add('hidden');
         btnSave.classList.remove('hidden');
@@ -100,6 +101,14 @@ function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
 
 function capitalizeFirstLetter(value) {
     return String(value).charAt(0).toUpperCase() + String(value).slice(1);
+}
+
+function toggleInputState(inputText, isDisabled) {
+    if (isDisabled) {
+        inputText.setAttribute('disabled', 'true');
+    } else {
+        inputText.removeAttribute('disabled');
+    }
 }
 
 document.addEventListener("click", function (event) {
