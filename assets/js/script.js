@@ -22,11 +22,15 @@ function saveTask() {
     if (taskInput.value.trim() === '') {
         alert('Informe uma tarefa');
         return;
-    } else {
-        createTaskElement();
-        taskInput.value = '';
-        closeModal();
     }
+
+    if (!isPrioritySelected()) {
+        return;
+    }
+
+    createTaskElement();
+    taskInput.value = '';
+    closeModal();
 }
 
 function createTaskElement() {
@@ -85,7 +89,7 @@ function createTaskElement() {
     });
 }
 
-function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete, inputText) {
+function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
     if (btnEdit.classList.contains('hidden')) {
         btnSave.classList.add('hidden');
         btnCancel.classList.add('hidden');
@@ -109,6 +113,22 @@ function toggleInputState(inputText, isDisabled) {
     } else {
         inputText.removeAttribute('disabled');
     }
+}
+
+function isPrioritySelected () {
+    const lowPriority = document.querySelector('#low');
+    const middlePriority = document.querySelector('#middle');
+    const highPriority = document.querySelector('#high');
+
+    const priorityRadios =[lowPriority, middlePriority, highPriority]
+
+    let isSelected = priorityRadios.some(radio => radio.checked);
+
+    if (!isSelected) {
+        alert('Selecione uma prioridade');
+        return false;
+    }
+    return true;
 }
 
 document.addEventListener("click", function (event) {
