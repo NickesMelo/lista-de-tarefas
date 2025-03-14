@@ -19,14 +19,29 @@
                 <!-- Modal -->
                 <div id="modal-container-general">
                     <div class="modal" id="modal">
+                        <h2>Nova Tarefa</h2>
                         <div class="modal-content">
-                            <input type="text" id="task-input" placeholder="Digite a tarefa"
-                                aria-label="Digite a tarefa">
+                            <input type="text" id="task-input" placeholder="Digite a tarefa" aria-label="Digite a tarefa">
                             <button id="btn-save-task" aria-label="Salvar a nova tarefa">Salvar</button>
                             <button id="btn-close-modal" aria-label="Cancelar a nova tarefa">Cancelar</button>
                         </div>
+                        <section id="section-level-priority">
+                            <div>
+                                <input type="radio" name="priority" id="low" value="Baixo">
+                                <label for="low">Baixo</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="priority" id="middle" value="Médio">
+                                <label for="middle">Médio</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="priority" id="high" value="Alto">
+                                <label for="high">Alto</label>
+                            </div>
+                        </section>
                     </div>
                 </div>
+                
             </section>
             <section id="section-list">
                 <!-- To do list -->
