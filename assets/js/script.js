@@ -104,15 +104,9 @@ function toggleInputState(inputText, isDisabled) {
 }
 
 function isPrioritySelected() {
-    const lowPriority = document.querySelector('#low');
-    const middlePriority = document.querySelector('#middle');
-    const highPriority = document.querySelector('#high');
+    const selectedPriority = document.querySelector('input[name="priority"]:checked');
 
-    const priorityRadios = [lowPriority, middlePriority, highPriority]
-
-    let isSelected = priorityRadios.some(radio => radio.checked);
-
-    if (!isSelected) {
+    if (!selectedPriority) {
         alert('Selecione uma prioridade');
         return false;
     }
