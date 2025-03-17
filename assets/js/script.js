@@ -27,14 +27,21 @@ function saveTask() {
     createTaskElement();
     taskInput.value = '';
     closeModal();
+    getCurrentDateTime()
 }
 
 function createTaskElement() {
     const li = document.createElement('li');
     li.appendChild(createCheckbox());
-
+    
+    let p = createP();
+    li.appendChild(p);
+    p.innerHTML = getCurrentDateTime();
+    
     const inputText = createTaskInput(taskInput.value);
     li.appendChild(inputText);
+    
+
 
     const btnEdit = createButton('Editar', 'background-green');
     const btnDelete = createButton('Excluir', 'background-red');
@@ -45,7 +52,7 @@ function createTaskElement() {
     li.appendChild(btnDelete);
     li.appendChild(btnSave);
     li.appendChild(btnCancel);
-
+    
     taskListContainer.appendChild(li);
 
     addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li);
@@ -75,6 +82,11 @@ function createButton(label, className, hidden = false) {
 
     if (hidden) button.classList.add('hidden');
     return button;
+}
+
+function createP() {
+    const paragraph = document.createElement('p');
+    return paragraph;
 }
 
 function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
@@ -132,6 +144,10 @@ function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
     btnDelete.addEventListener("click", function () {
         taskListContainer.removeChild(li);
     });
+}
+
+function getCurrentDateTime() {
+    return new Date().toLocaleString();
 }
 
 btnAddTask.addEventListener("click", showTaskModal);

@@ -29,7 +29,7 @@ body {
 
 /* Estrutura principal */
 #container-general {
-    min-width: 40vw;
+    min-width: 70vw;
     min-height: 600px;
     background-color: white;
     border-radius: var(--border-radius);
@@ -117,7 +117,7 @@ button {
     list-style: none;
 }
 
-#task-list-ul li {
+#task-list-ul>li {
     background-color: #f5f5f5;
     padding: var(--padding-small);
     margin-bottom: 5px;
@@ -239,10 +239,12 @@ dialog {
 /* Estilização dos radio e checkbox */
 input[type=radio], input[type=checkbox]  {
     border: 0px;
-    width: 100%;
+    width: 1.5rem;
     height: 2em;
 } 
 
 input[type=text] {
     font-size: 1.1rem;
+    width: 450px;
+    text-align: center;
 }
