@@ -1,9 +1,9 @@
 const taskListContainer = document.querySelector('#task-list-ul');
 const btnAddTask = document.querySelector('#btn-add');
-const taskInput = document.querySelector('#task-input');
 const btnSaveTask = document.querySelector('#btn-save-task');
 const btnCloseModal = document.querySelector('#btn-close-modal');
 const modal = document.querySelector('#modal');
+const taskInput = document.querySelector('#task-input');
 
 function showTaskModal() {
     modal.classList.add('visible');
@@ -37,7 +37,7 @@ function createTaskElement() {
     let p = createP();
     li.appendChild(p);
     p.innerHTML = getCurrentDateTime();
-    
+
     const inputText = createTaskInput(taskInput.value);
     li.appendChild(inputText);
     
@@ -71,6 +71,8 @@ function createTaskInput(value) {
     inputText.type = 'text';
     inputText.disabled = true;
     inputText.value = capitalizeFirstLetter(value);
+    inputText.setAttribute('maxlength', '50');
+    inputText.setAttribute('placeholder', 'Máximo 50 caracteres');
     return inputText;
 }
 
