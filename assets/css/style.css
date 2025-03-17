@@ -133,6 +133,10 @@ button {
 }
 
 /* Modal */
+dialog {
+    border: none;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -168,7 +172,7 @@ button {
     width: 100%;
 }
 
-#section-level-priority {
+#section-level-priority>fieldset {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;

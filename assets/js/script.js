@@ -1,13 +1,9 @@
 const taskListContainer = document.querySelector('#task-list-ul');
 const btnAddTask = document.querySelector('#btn-add');
 const taskInput = document.querySelector('#task-input');
-const btnSave = document.querySelector('#btn-save-task');
+const btnSaveTask = document.querySelector('#btn-save-task');
 const btnCloseModal = document.querySelector('#btn-close-modal');
 const modal = document.querySelector('#modal');
-
-function initializeTaskApp() {
-    showTaskModal();
-}
 
 function showTaskModal() {
     modal.classList.add('visible');
@@ -34,59 +30,51 @@ function saveTask() {
 }
 
 function createTaskElement() {
-    let li = document.createElement('li');
-    let inputCheckbox = document.createElement('input');
-    let inputText = document.createElement('input');
+    const li = document.createElement('li');
+    li.appendChild(createCheckbox());
 
-    inputCheckbox.setAttribute('type', 'checkbox');
-    inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída');
-    inputText.setAttribute('type', 'text');
-    inputText.setAttribute('disabled', 'true');
-
-    inputText.value = capitalizeFirstLetter(taskInput.value);
-
-    let btnSaveTask = document.createElement('button');
-    let btnDelete = document.createElement('button');
-    let btnEdit = document.createElement('button');
-    let btnCancel = document.createElement('button');
-
-    btnSaveTask.classList.add('hidden', 'background-green');
-    btnCancel.classList.add('hidden', 'background-yellow');
-
-    btnEdit.classList.add('background-green');
-    btnDelete.classList.add('background-red');
-
-    btnSaveTask.innerHTML = 'Salvar';
-    btnEdit.innerHTML = 'Editar';
-    btnDelete.innerHTML = 'Excluir';
-    btnCancel.innerHTML = 'Cancelar';
-
-    li.appendChild(inputCheckbox);
+    const inputText = createTaskInput(taskInput.value);
     li.appendChild(inputText);
+
+    const btnEdit = createButton('Editar', 'background-green');
+    const btnDelete = createButton('Excluir', 'background-red');
+    const btnSave = createButton('Salvar', 'background-green', true);
+    const btnCancel = createButton('Cancelar', 'background-yellow', true);
+
     li.appendChild(btnEdit);
     li.appendChild(btnDelete);
-    li.appendChild(btnSaveTask);
+    li.appendChild(btnSave);
     li.appendChild(btnCancel);
+
     taskListContainer.appendChild(li);
 
-    btnEdit.addEventListener("click", function () {
-        toggleInputState(inputText, false);
-        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
-    });
+    addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li);
 
-    btnSaveTask.addEventListener("click", function () {
-        toggleInputState(inputText, true);
-        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
-    });
+}
 
-    btnCancel.addEventListener("click", function () {
-        toggleInputState(inputText, true);
-        toggleEditSaveTask(btnEdit, btnSaveTask, btnCancel, btnDelete);
-    });
+function createCheckbox() {
+    const inputCheckbox = document.createElement('input');
+    inputCheckbox.type = 'checkbox';
+    inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída')
+    return inputCheckbox;
+}
 
-    btnDelete.addEventListener("click", function () {
-        taskListContainer.removeChild(li);
-    });
+function createTaskInput(value) {
+    const inputText = document.createElement('input');
+    inputText.type = 'text';
+    inputText.disabled = true;
+    inputText.value = capitalizeFirstLetter(value);
+    return inputText;
+}
+
+function createButton(label, className, hidden = false) {
+    const button = document.createElement('button');
+
+    button.textContent = label;
+    button.classList.add(className);
+
+    if (hidden) button.classList.add('hidden');
+    return button;
 }
 
 function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
@@ -115,12 +103,12 @@ function toggleInputState(inputText, isDisabled) {
     }
 }
 
-function isPrioritySelected () {
+function isPrioritySelected() {
     const lowPriority = document.querySelector('#low');
     const middlePriority = document.querySelector('#middle');
     const highPriority = document.querySelector('#high');
 
-    const priorityRadios =[lowPriority, middlePriority, highPriority]
+    const priorityRadios = [lowPriority, middlePriority, highPriority]
 
     let isSelected = priorityRadios.some(radio => radio.checked);
 
@@ -131,20 +119,39 @@ function isPrioritySelected () {
     return true;
 }
 
-document.addEventListener("click", function (event) {
-    if (modal.classList.contains('visible') && !modal.contains(event.target) && event.target !== btnAddTask) {
-        closeModal();
-    }
-});
+function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
+    btnEdit.addEventListener("click", function () {
+        toggleInputState(inputText, false);
+        toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+    });
 
-btnAddTask.addEventListener("click", function () {
-    initializeTaskApp();
-});
+    btnSave.addEventListener("click", function () {
+        toggleInputState(inputText, true);
+        toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+    });
+
+    btnCancel.addEventListener("click", function () {
+        toggleInputState(inputText, true);
+        toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete);
+    });
+
+    btnDelete.addEventListener("click", function () {
+        taskListContainer.removeChild(li);
+    });
+}
+
+btnAddTask.addEventListener("click", showTaskModal);
 
 btnCloseModal.addEventListener("click", function () {
     closeModal();
 });
 
-btnSave.addEventListener("click", function () {
+btnSaveTask.addEventListener("click", function () {
     saveTask();
+});
+
+document.addEventListener("click", function (event) {
+    if (modal.classList.contains('visible') && !modal.contains(event.target) && event.target !== btnAddTask) {
+        closeModal();
+    }
 });
