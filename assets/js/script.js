@@ -27,7 +27,7 @@ function saveTask() {
     createTaskElement();
     taskInput.value = '';
     closeModal();
-    getCurrentDateTime()
+    getCurrentDate()
 }
 
 function createTaskElement() {
@@ -36,13 +36,11 @@ function createTaskElement() {
     
     let p = createP();
     li.appendChild(p);
-    p.innerHTML = getCurrentDateTime();
+    p.innerHTML = getCurrentDate();
 
     const inputText = createTaskInput(taskInput.value);
     li.appendChild(inputText);
     
-
-
     const btnEdit = createButton('Editar', 'background-green');
     const btnDelete = createButton('Excluir', 'background-red');
     const btnSave = createButton('Salvar', 'background-green', true);
@@ -56,7 +54,6 @@ function createTaskElement() {
     taskListContainer.appendChild(li);
 
     addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li);
-
 }
 
 function createCheckbox() {
@@ -114,6 +111,7 @@ function toggleInputState(inputText, isDisabled) {
         inputText.setAttribute('disabled', 'true');
     } else {
         inputText.removeAttribute('disabled');
+        inputText.focus();
     }
 }
 
@@ -148,8 +146,8 @@ function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
     });
 }
 
-function getCurrentDateTime() {
-    return new Date().toLocaleString();
+function getCurrentDate() {
+    return new Date().toLocaleDateString();
 }
 
 btnAddTask.addEventListener("click", showTaskModal);
