@@ -5,7 +5,7 @@ const btnCloseModal = document.querySelector('#btn-close-modal');
 const modal = document.querySelector('#modal');
 const taskInput = document.querySelector('#task-input');
 
-function showTaskModal() {
+function initApp() {
     modal.classList.add('visible');
     taskInput.focus();
 }
@@ -24,10 +24,29 @@ function saveTask() {
         return;
     }
 
-    createTaskElement();
+    const newTask = createTaskElement()
+    taskConcluded(newTask);
+
     taskInput.value = '';
     closeModal();
     getCurrentDate()
+}
+
+function taskConcluded (taskElement) {
+    const checkbox = taskElement.querySelector('input[type="checkbox"]');
+    
+    if(!checkbox){
+        console.log("Checkbox não encontrado");
+    }
+    
+    checkbox.addEventListener("change", function () {
+        if (checkbox.checked) {
+            checkbox.disabled = true;
+            
+            const btnEdit = taskElement.querySelector('#edit');
+            if(btnEdit) btnEdit.disabled = true;
+        }
+    });
 }
 
 function createTaskElement() {
@@ -46,6 +65,11 @@ function createTaskElement() {
     const btnSave = createButton('Salvar', 'background-green', true);
     const btnCancel = createButton('Cancelar', 'background-yellow', true);
 
+    btnEdit.setAttribute('id', 'edit');
+    btnDelete.setAttribute('id', 'delete');
+    btnSave.setAttribute('id', 'save');
+    btnCancel.setAttribute('id', 'cancel');
+
     li.appendChild(btnEdit);
     li.appendChild(btnDelete);
     li.appendChild(btnSave);
@@ -54,11 +78,13 @@ function createTaskElement() {
     taskListContainer.appendChild(li);
 
     addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li);
+    return li;
 }
 
 function createCheckbox() {
     const inputCheckbox = document.createElement('input');
     inputCheckbox.type = 'checkbox';
+    inputCheckbox.disabled = false;
     inputCheckbox.setAttribute('aria-label', 'Marcar tarefa como concluída')
     return inputCheckbox;
 }
@@ -71,6 +97,15 @@ function createTaskInput(value) {
     inputText.setAttribute('maxlength', '50');
     inputText.setAttribute('placeholder', 'Máximo 50 caracteres');
     return inputText;
+}
+
+function toggleInputState(inputText, isDisabled) {
+    if (isDisabled) {
+        inputText.setAttribute('disabled', 'true');
+    } else {
+        inputText.removeAttribute('disabled');
+        inputText.focus();
+    }
 }
 
 function createButton(label, className, hidden = false) {
@@ -104,15 +139,6 @@ function toggleEditSaveTask(btnEdit, btnSave, btnCancel, btnDelete) {
 
 function capitalizeFirstLetter(value) {
     return String(value).charAt(0).toUpperCase() + String(value).slice(1);
-}
-
-function toggleInputState(inputText, isDisabled) {
-    if (isDisabled) {
-        inputText.setAttribute('disabled', 'true');
-    } else {
-        inputText.removeAttribute('disabled');
-        inputText.focus();
-    }
 }
 
 function isPrioritySelected() {
@@ -150,7 +176,7 @@ function getCurrentDate() {
     return new Date().toLocaleDateString();
 }
 
-btnAddTask.addEventListener("click", showTaskModal);
+btnAddTask.addEventListener("click", initApp);
 
 btnCloseModal.addEventListener("click", function () {
     closeModal();
