@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Gestor de Tarefas</title>
+</head>
+
+<body>
+    <div id="container-general">
+        <header>
+            <h1>Lista de tarefas</h1>
+        </header>
+        <main>
+            <section id="section-modal">
+                <!-- Modal -->
+                <div id="modal-container-general">
+                    <dialog class="modal" id="modal">
+                        <h2>Nova Tarefa</h2>
+                        <section class="modal-content">
+                            <div class="tooltip">
+                                <input type="text" id="task-input" maxlength="50" placeholder="Digite a tarefa" aria-label="Digite a tarefa. Máximo 50 caracteres">
+                                <span class="tooltiptext">máx. 50 caracteres</span>
+                                
+                            </div>
+                            <button id="btn-save-task" aria-label="Salvar a nova tarefa">Salvar</button>
+                            <button id="btn-close-modal" aria-label="Cancelar a nova tarefa">Cancelar</button>
+                        </section>
+                        <section id="section-level-priority">
+                            <fieldset>
+                                <label for="low"><input type="radio" name="priority" id="low" value="Baixo">Baixo</label>
+                                <label for="medium"><input type="radio" name="priority" id="medium" value="Médio">Médio</label>
+                                <label for="high"><input type="radio" name="priority" id="high" value="Alto">Alto</label>
+                            </fieldset>
+                        </section>
+                    </dialog>
+                </div>
+                
+            </section>
+            <section id="section-list">
+                <!-- To do list -->
+                <div class="container-buttons">
+                    <button type="button" id="btn-add" aria-label="Adicionar nova tarefa">Adicionar</button>
+                </div>
+                <div class="container-lists">
+                    <ul id="task-list-ul"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
