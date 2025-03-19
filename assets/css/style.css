@@ -121,7 +121,17 @@ button {
     box-shadow: var(--shadow);
 }
 
+.low-priority {
+    background-color: #689F38;
+}
 
+.medium-priority {
+    background-color: #e1b12c;
+}
+
+.high-priority {
+    background-color: #D32F2F;
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar {
@@ -147,7 +157,6 @@ button {
 }
 
 #task-list-ul>li {
-    background-color: #f5f5f5;
     padding: var(--padding-small);
     margin-bottom: 5px;
     border-radius: var(--border-radius);
@@ -214,7 +223,7 @@ dialog {
     transition: all 0.3s ease-in-out
 }
 
-#section-level-priority label[for='middle']:hover {
+#section-level-priority label[for='medium']:hover {
     text-decoration: solid underline #e1b12c 5px;
     transition: all 0.3s ease-in-out
 }

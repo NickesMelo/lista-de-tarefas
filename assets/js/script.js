@@ -20,31 +20,34 @@ function saveTask() {
         return;
     }
 
-    if (!isPrioritySelected()) {
-        return;
-    }
+    const selectedPriority = isPrioritySelected();
 
-    const newTask = createTaskElement()
+    if (!selectedPriority) return;
+
+    const newTask = createTaskElement();
+    addClassPriority(selectedPriority, newTask);
+
     taskConcluded(newTask);
-
     taskInput.value = '';
     closeModal();
-    getCurrentDate()
+    getCurrentDate();
+
+    return newTask;
 }
 
-function taskConcluded (taskElement) {
+function taskConcluded(taskElement) {
     const checkbox = taskElement.querySelector('input[type="checkbox"]');
-    
-    if(!checkbox){
+
+    if (!checkbox) {
         console.log("Checkbox não encontrado");
     }
-    
+
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             checkbox.disabled = true;
-            
+
             const btnEdit = taskElement.querySelector('#edit');
-            if(btnEdit) btnEdit.disabled = true;
+            if (btnEdit) btnEdit.disabled = true;
         }
     });
 }
@@ -52,14 +55,14 @@ function taskConcluded (taskElement) {
 function createTaskElement() {
     const li = document.createElement('li');
     li.appendChild(createCheckbox());
-    
+
     let p = createP();
     li.appendChild(p);
     p.innerHTML = getCurrentDate();
 
     const inputText = createTaskInput(taskInput.value);
     li.appendChild(inputText);
-    
+
     const btnEdit = createButton('Editar', 'background-green');
     const btnDelete = createButton('Excluir', 'background-red');
     const btnSave = createButton('Salvar', 'background-green', true);
@@ -74,7 +77,7 @@ function createTaskElement() {
     li.appendChild(btnDelete);
     li.appendChild(btnSave);
     li.appendChild(btnCancel);
-    
+
     taskListContainer.appendChild(li);
 
     addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li);
@@ -146,9 +149,22 @@ function isPrioritySelected() {
 
     if (!selectedPriority) {
         alert('Selecione uma prioridade');
-        return false;
+        return null;
     }
-    return true;
+
+    return selectedPriority;
+}
+
+function addClassPriority(priority, taskElement) {
+    if (priority.id === 'high') {
+        taskElement.classList.add('high-priority');
+    }
+    if (priority.id === 'medium') {
+        taskElement.classList.add('medium-priority');
+    }
+    if (priority.id === 'low') {
+        taskElement.classList.add('low-priority');
+    }
 }
 
 function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
