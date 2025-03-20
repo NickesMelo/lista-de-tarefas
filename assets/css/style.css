@@ -137,6 +137,12 @@ button:hover {
     background-color: #EF9A9A;
 }
 
+.task-concluded {
+    text-decoration: line-through;
+    color: #757575;
+    background-color: #f5f5f5;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;

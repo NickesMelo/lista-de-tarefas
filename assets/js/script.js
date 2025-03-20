@@ -48,6 +48,10 @@ function taskConcluded(taskElement) {
 
             const btnEdit = taskElement.querySelector('#edit');
             if (btnEdit) btnEdit.disabled = true;
+
+            toggleInputState(taskElement.querySelector('input[name="taskDescription"]'), true);
+            toggleEditSaveTask(btnEdit, taskElement.querySelector('#save'), taskElement.querySelector('#cancel'), taskElement.querySelector('#delete'));
+            taskElement.classList.add('task-concluded');
         }
     });
 }
