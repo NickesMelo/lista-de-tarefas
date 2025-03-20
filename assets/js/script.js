@@ -21,7 +21,6 @@ function saveTask() {
     }
 
     const selectedPriority = isPrioritySelected();
-
     if (!selectedPriority) return;
 
     const newTask = createTaskElement();
@@ -29,6 +28,7 @@ function saveTask() {
 
     taskConcluded(newTask);
     taskInput.value = '';
+    resetPriority();
     closeModal();
     getCurrentDate();
 
@@ -165,6 +165,10 @@ function addClassPriority(priority, taskElement) {
     if (priority.id === 'low') {
         taskElement.classList.add('low-priority');
     }
+}
+
+function resetPriority() {
+    document.querySelector('input[name="priority"]:checked').checked = false;
 }
 
 function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
