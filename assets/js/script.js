@@ -54,13 +54,16 @@ function taskConcluded(taskElement) {
 
 function createTaskElement() {
     const li = document.createElement('li');
-    li.appendChild(createCheckbox());
+    const checkbox = createCheckbox();
+    checkbox.setAttribute('name', 'checkbox');
+    li.appendChild(checkbox);
 
     let p = createP();
     li.appendChild(p);
     p.innerHTML = getCurrentDate();
 
     const inputText = createTaskInput(taskInput.value);
+    inputText.setAttribute('name', 'taskDescription');
     li.appendChild(inputText);
 
     const btnEdit = createButton('Editar', 'background-green');
