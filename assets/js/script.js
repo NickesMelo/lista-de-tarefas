@@ -42,25 +42,21 @@ function taskConcluded(taskElement) {
         console.log("Checkbox não encontrado");
     }
 
-    checkbox.addEventListener("change", function () {
-        if (checkbox.checked) {
-            checkbox.disabled = true;
-
-            const btnEdit = taskElement.querySelector('#edit');
-            if (btnEdit) btnEdit.disabled = true;
-        }
-    });
+    checkboxEvent(checkbox, taskElement);
 }
 
 function createTaskElement() {
     const li = document.createElement('li');
-    li.appendChild(createCheckbox());
+    const checkbox = createCheckbox();
+    checkbox.setAttribute('name', 'checkbox');
+    li.appendChild(checkbox);
 
     let p = createP();
     li.appendChild(p);
     p.innerHTML = getCurrentDate();
 
     const inputText = createTaskInput(taskInput.value);
+    inputText.setAttribute('name', 'taskDescription');
     li.appendChild(inputText);
 
     const btnEdit = createButton('Editar', 'background-green');
@@ -190,6 +186,37 @@ function addTaskEvents(btnEdit, btnDelete, btnSave, btnCancel, inputText, li) {
     btnDelete.addEventListener("click", function () {
         taskListContainer.removeChild(li);
     });
+}
+
+function checkboxEvent(checkbox, taskElement) {
+    checkbox.addEventListener("change", function () {
+        if (checkbox.checked) {
+            checkbox.disabled = true;
+
+            resetTaskButtons(taskElement);
+
+            toggleInputState(taskElement.querySelector('input[name="taskDescription"]'), true);
+
+            taskElement.classList.add('task-concluded');
+        }
+    });
+}
+
+function resetTaskButtons(taskElement) {
+    const btnSave = taskElement.querySelector('#save');
+    const btnEdit = taskElement.querySelector('#edit');
+    const btnCancel = taskElement.querySelector('#cancel');
+    const btnDelete = taskElement.querySelector('#delete');
+
+    if (btnSave && btnEdit && btnCancel && btnDelete) {
+        
+        btnSave.classList.add('hidden');
+        btnCancel.classList.add('hidden');
+        btnEdit.classList.remove('hidden');
+        btnDelete.classList.remove('hidden');
+
+        btnEdit.disabled = true;
+    }
 }
 
 function getCurrentDate() {
