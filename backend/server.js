@@ -106,6 +106,23 @@ app.put('/tasks/:id', (req, res) => {
     });
 });
 
+//Deletar uma tarefa
+app.delete('/tasks/:id', (req, res) => {
+    const {id} = req.params;
+
+    const query = 'DELETE FROM tasks WHERE id=?';
+
+    db.run(query, [id], function (err) {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao deletar tarefa' });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Tarefa não encontrada' });
+        }
+        res.status(204).json({ message: 'Tarefa deletada com sucesso'});
+    });
+});
+
 //Iniciar o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
