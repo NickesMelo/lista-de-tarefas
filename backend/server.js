@@ -34,6 +34,34 @@ db.serialize(() => {
     `);
 });
 
+//Adicionar uma nova tarefa
+app.post('/tasks', (req, res) => {
+    const { title, description, priority} = req.body;
+
+    if (!title || !priority) {
+        return res.status(400).json({ error: 'Título e prioridade são obrigatórios' });
+    }
+
+    const query = `
+        INSERT INTO tasks (title, description, priority)
+        VALUES (?, ?, ?)
+    `;
+    const values = [title, description, priority];
+
+    db.run(query, values, function (err) {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao adicionar tarefa' });
+        }
+        res.status(201).json({
+            id: this.lastID,
+            title,
+            description,
+            priority
+        });
+    });
+});
+
+
 
 
 
