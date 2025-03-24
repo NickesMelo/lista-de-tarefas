@@ -73,7 +73,38 @@ app.get('/tasks', (req, res) => {
     });
 });
 
+//Atualizar uma tarefa existente
+app.put('/tasks/:id', (req, res) => {
+    const {title, description, priority } = req.body;
+    const { id } = req.params;
 
+    if (!title || !priority) {
+        return res.status(400).json({ error: 'Título e prioridade são obrigatórios' });
+    }
+
+    const query = `
+        UPDATE tasks
+        SET title = ?, description = ?, priority = ?
+        WHERE id = ?
+    `;
+
+    const values = [title, description, priority, id];
+
+    db.run(query, values, function (err) {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao atualizar tarefa' });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Tarefa não encontrada' });
+        }
+        res.status(200).json({
+            id: this.lastID,
+            title,
+            description,
+            priority
+        });
+    });
+});
 
 //Iniciar o servidor
 app.listen(PORT, () => {
