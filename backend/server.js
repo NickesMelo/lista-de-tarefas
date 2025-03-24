@@ -61,7 +61,17 @@ app.post('/tasks', (req, res) => {
     });
 });
 
+//Listar todas as tarefas
+app.get('/tasks', (req, res) => {
+    const query = 'SELECT * FROM tasks ORDER BY created_at DESC';
 
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao buscar tarefas' });
+        }
+        res.status(200).json(rows);
+    });
+});
 
 
 
