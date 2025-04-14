@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #b6f0b8;  /* Verde mais suave */
-    --secondary-color: #90CAF9; /* Azul mais neutro */
+    --primary-color: #b6f0b8;
+    --secondary-color: #90CAF9;
     --modal-bg: rgba(0, 0, 0, 0.5);
-    --text-color: #444;  /* Tom de cinza mais suave */
+    --text-color: #444;
     --font-family: "Montserrat", sans-serif;
     --border-radius: 10px;
     --padding-small: 10px;
@@ -27,10 +27,9 @@ body {
     padding: var(--padding-medium);
 }
 
-/* Estrutura principal */
 #container-general {
-    min-width: 65vw;
-    min-height: 400px;
+    width: 100%;
+    max-width: 100vw;
     background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -47,7 +46,7 @@ header {
 
 header h1 {
     text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -61,6 +60,7 @@ button {
     text-align: center;
     font-size: 1rem;
     transition: all 0.3s ease-in-out;
+    width: 100%;
 }
 
 button:hover {
@@ -68,30 +68,22 @@ button:hover {
 }
 
 #btn-add {
-    width: 200px;
     background-color: var(--primary-color);
     text-transform: uppercase;
-
+    max-width: 200px;
+    margin: auto;
 }
 
 .background-green {
-    width: 80px;
     background-color: var(--primary-color);
 }
 
 .background-red {
-    width: 80px;
     background-color: #E57373;
 }
 
 .background-yellow {
-    width: 80px;
     background-color: #f4d03f;
-}
-
-#btn-add:hover {
-    background-color: #689F38;
-    color: white;
 }
 
 .background-green:hover {
@@ -109,13 +101,12 @@ button:hover {
     color: white;
 }
 
-/* Seções */
+/* Lista de tarefas */
 .container-buttons {
     text-align: center;
     margin-top: var(--padding-medium);
 }
 
-/* Lista de Tarefas */
 .container-lists {
     margin-top: var(--padding-medium);
     padding: 5px;
@@ -143,32 +134,13 @@ button:hover {
     background-color: #f5f5f5;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 15px;
-  }
-   
-  ::-webkit-scrollbar-thumb {
-    background: rgb(194, 194, 194); 
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #d4d4d4; 
-  }
-
 #task-list-ul {
     list-style: none;
 }
 
 #task-list-ul>li {
     padding: var(--padding-small);
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-radius: var(--border-radius);
     display: flex;
     justify-content: space-between;
@@ -180,6 +152,11 @@ button:hover {
     background-color: #e0e0e0;
 }
 
+#task-list-ul li button {
+    margin: 0 5px; /* Espaçamento horizontal */
+    padding: 5px 10px; /* Ajusta o tamanho do botão */
+}
+
 /* Modal */
 dialog {
     border: none;
@@ -188,7 +165,7 @@ dialog {
 .modal {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: lightgray;
@@ -196,7 +173,7 @@ dialog {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     z-index: 1000;
-    width: 90%;
+    width: 50%;
     max-width: 400px;
     text-align: center;
 }
@@ -207,20 +184,67 @@ dialog {
 
 .modal-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 10px;
     margin-top: 10px;
 }
 
+/* Inputs */
 #task-input {
     padding: 8px;
     border-radius: var(--border-radius);
     font-size: 1rem;
-    width: 100%;
+    text-align: center;
+    text-indent: 5px;
+    border: solid 1.5px #D3D3D3;
+    width: 90%; /* Ajusta a largura ao modal */
+    max-width: 100%; /* Garante que não ultrapasse o limite */
+    transition: 1s;
+    /* font-size: 2rem; */
 }
 
+input[type=text]:hover {
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+}
+
+input[type=text]:focus {
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    outline-width: 0px;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    border: none;
+    width: 1.5rem;
+    height: 1rem;
+}
+
+/* Estilo para o input com name="taskDescription" */
+input[name="taskDescription"] {
+    padding: 8px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    text-align: center;
+    text-indent: 5px;
+    border: solid 1.5px #D3D3D3;
+    width: 90%; /* Ajusta a largura */
+    max-width: 100%; /* Garante que não ultrapasse o limite */
+    transition: 0.3s ease-in-out;
+    background-color: #fff; /* Fundo branco */
+    color: var(--text-color); /* Cor do texto */
+}
+
+input[name="taskDescription"]:hover {
+    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+}
+
+input[name="taskDescription"]:focus {
+    box-shadow: 0 0 5pt 2pt #D3D3D3;
+    outline: none;
+}
+
+/* Modal Fieldset */
 #section-level-priority>fieldset {
     display: flex;
     justify-content: space-evenly;
@@ -228,21 +252,12 @@ dialog {
     margin-top: 10px;
 }
 
-#section-level-priority label[for='low']:hover {
-    text-decoration: solid underline #689F38 5px;
-    transition: all 0.3s ease-in-out
-}
-
-#section-level-priority label[for='medium']:hover {
-    text-decoration: solid underline #e1b12c 5px;
-    transition: all 0.3s ease-in-out
-}
-
-#section-level-priority label[for='high']:hover {
-    text-decoration: solid underline #D32F2F 5px;
+#section-level-priority label:hover {
+    text-decoration: underline;
     transition: all 0.3s ease-in-out;
 }
 
+/* Botões do modal */
 #btn-save-task {
     background-color: var(--secondary-color);
 }
@@ -263,44 +278,6 @@ dialog {
     box-shadow: 0 0 5pt 0.5pt #D3D3D3;
 }
 
-/* Class geral usadas no modal e nos btn */
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Estilização dos radio e checkbox */
-input[type=radio],
-input[type=checkbox] {
-    border: none;
-    width: 1.5rem;
-    height: 1rem;
-}
-
-input[type=text] {
-    font-size: 1.1rem;
-    width: 450px;
-    text-align: center;
-
-    text-indent: 5px;
-    border-radius: 50px;
-    border: solid 1.5px #D3D3D3;
-    -webkit-transition: 1s;
-    transition: 1s;
-}
-
-input[type=text]:hover {
-    box-shadow: 0 0 5pt 0.5pt #D3D3D3;
-}
-
-input[type=text]:focus {
-    box-shadow: 0 0 5pt 2pt #D3D3D3;
-    outline-width: 0px;
-}
-
 /* Tooltip */
 .tooltip {
     position: relative;
@@ -309,19 +286,17 @@ input[type=text]:focus {
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 60px;
+    width: auto; /* Ajusta a largura ao conteúdo */
+    max-width: 200px; /* Define um limite máximo */
+    white-space: nowrap; /* Evita quebra de linha */
+    bottom: 100%; /* Ajusta o posicionamento */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%);
     background-color: rgb(121, 118, 118);
     color: white;
     text-align: center;
     padding: 5px;
     border-radius: 6px;
-
-    /* Posicionamento */
-    position: absolute;
-    bottom: 120%;
-    left: 15%;
-    transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.9s ease-in-out;
 }
@@ -331,22 +306,29 @@ input[type=text]:focus {
     opacity: 0.6;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    #container-general {
-        width: 100%;
-        min-height: auto;
-    }
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
 
-    header h1 {
-        font-size: 1.5rem;
-    }
+::-webkit-scrollbar-track {
+    background: var(--secondary-color); /* Cor do track */
+}
 
-    button {
-        width: 100%;
-    }
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color); /* Cor do thumb */
+    border-radius: 10px;
+}
 
-    .modal {
-        width: 80%;
-    }
+::-webkit-scrollbar-thumb:hover {
+    background: #689F38; /* Cor ao passar o mouse */
+}
+
+/* Visibilidade */
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }

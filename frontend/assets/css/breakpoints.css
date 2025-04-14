@@ -1,0 +1,130 @@
+/* Breakpoint: Dispositivos muito pequenos (ex.: smartphones antigos) */
+@media (min-width: 332px) and (max-width: 400px) {
+    #container-general {
+        max-width: 90vw;
+    }
+
+    .modal {
+        width: 60%;
+    }
+
+    #task-list-ul>li {
+        flex-direction: column; /* Organiza os elementos em coluna */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+        gap: 10px; /* Espaçamento entre os elementos */
+    }
+
+    #task-list-ul>li>p {
+        display: none; /* Remove a data */
+    }
+
+    #task-list-ul>li>input[type="checkbox"] {
+        margin-right: 10px; /* Espaçamento entre o checkbox e a descrição */
+    }
+
+    #task-list-ul>li>input[name="taskDescription"] {
+        width: 100%; /* Garante que ocupe toda a largura disponível */
+    }
+
+    #task-list-ul>li .button-group {
+        display: flex;
+        flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha */
+        gap: 5px; /* Espaçamento entre os botões */
+        width: 100%; /* Garante que os botões ocupem toda a largura */
+    }
+
+    #task-list-ul>li .button-group button {
+        flex: 1 1 calc(50% - 10px); /* Cada botão ocupa 50% da largura com espaçamento */
+        margin: 0; /* Remove margens extras */
+    }
+}
+
+/* Breakpoint: Smartphones */
+@media (max-width: 576px) {
+    #container-general {
+        max-width: 90vw;
+    }
+
+    .modal {
+        width: 80%;
+    }
+
+    #task-list-ul>li {
+        flex-direction: column; /* Organiza os elementos em coluna */
+        align-items: flex-start; /* Alinha os itens à esquerda */
+        gap: 10px; /* Espaçamento entre os elementos */
+    }
+
+    #task-list-ul>li>p {
+        display: none; /* Remove a data */
+    }
+
+    #task-list-ul>li>input[type="checkbox"] {
+        margin-right: 10px; /* Espaçamento entre o checkbox e a descrição */
+    }
+
+    #task-list-ul>li>input[name="taskDescription"] {
+        width: 100%; /* Garante que ocupe toda a largura disponível */
+    }
+
+    #task-list-ul>li .button-group {
+        display: flex;
+        flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha */
+        gap: 5px; /* Espaçamento entre os botões */
+        width: 100%; /* Garante que os botões ocupem toda a largura */
+    }
+
+    #task-list-ul>li .button-group button {
+        flex: 1 1 calc(50% - 10px); /* Cada botão ocupa 50% da largura com espaçamento */
+        margin: 0; /* Remove margens extras */
+    }
+}
+
+/* Breakpoint: Tablets em modo paisagem */
+@media (max-width: 768px) {
+    #task-list-ul>li {
+        flex-direction: row; /* Alinha os elementos em linha */
+        flex-wrap: wrap; /* Permite que os elementos quebrem para a próxima linha */
+        justify-content: space-between; /* Distribui os elementos uniformemente */
+        align-items: center; /* Centraliza verticalmente */
+    }
+
+    #task-list-ul>li>input[name="taskDescription"] {
+        flex: 1; /* Faz a descrição ocupar o espaço restante */
+        margin-right: 10px; /* Espaçamento entre a descrição e os botões */
+    }
+
+    #task-list-ul>li .button-group button {
+        flex: 0 0 auto; /* Impede que os botões se expandam */
+        margin: 0 5px; /* Espaçamento entre os botões */
+    }
+}
+
+/* Breakpoint: Tablets em modo retrato */
+@media (min-width: 768px) {
+    #container-general {
+        max-width: 80vw;
+    }
+
+    .modal {
+        width: 60%;
+    }
+}
+
+/* Breakpoint: Laptops */
+@media (min-width: 992px) {
+    #container-general {
+        max-width: 60vw;
+    }
+
+    .modal {
+        width: 40%;
+    }
+}
+
+/* Breakpoint: Desktops grandes */
+@media (min-width: 1200px) {
+    #container-general {
+        max-width: 50vw;
+    }
+}
