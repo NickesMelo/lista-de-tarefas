@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/breakpoints.css">
@@ -13,41 +17,93 @@
 <body>
     <div id="container-general">
         <header>
-            <h1>Lista de tarefas</h1>
+            <div class="header-content">
+                <h1>Lista de tarefas</h1>
+                <p class="header-subtitle">Organize suas atividades de forma eficiente</p>
+            </div>
+            <button id="theme-toggle" aria-label="Alternar tema da página">
+                <i class="fas fa-moon"></i>
+            </button>
         </header>
         <main>
+            <!-- Stats tasks -->
+            <section id="section-stats" class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <span id="total-tasks">0</span>
+                    <p>Total</p>
+                </div>
+                <div class="stat-card"><i class="fas fa-check-circle"></i>
+                    <span id="completed-tasks">0</span>
+                    <p>Concluídas</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <span id="pending-tasks">0</span>
+                    <p>Pendentes</p>
+                </div>
+            </section>
+
+            <!-- Modal -->
             <section id="section-modal">
-                <!-- Modal -->
                 <div id="modal-container-general">
                     <dialog class="modal" id="modal">
                         <h2>Nova Tarefa</h2>
                         <section class="modal-content">
                             <div class="tooltip">
-                                <input type="text" id="task-input"  placeholder="Digite a tarefa" aria-label="Digite a tarefa. Máximo 50 caracteres" >
+                                <input type="text" id="task-input" placeholder="Digite a tarefa"
+                                    aria-label="Digite a tarefa. Máximo 50 caracteres">
                                 <span class="tooltiptext">máx. 50 caracteres</span>
-                                
                             </div>
                             <button id="btn-save-task" aria-label="Salvar a nova tarefa">Salvar</button>
                             <button id="btn-close-modal" aria-label="Cancelar a nova tarefa">Cancelar</button>
                         </section>
                         <section id="section-level-priority">
+                            <h2>Defina a prioridade:</h2>
                             <fieldset>
-                                <label for="low"><input type="radio" name="priority" id="low" value="Baixo">Baixo</label>
-                                <label for="medium"><input type="radio" name="priority" id="medium" value="Médio">Médio</label>
-                                <label for="high"><input type="radio" name="priority" id="high" value="Alto">Alto</label>
+                                <label for="low"><input type="radio" name="priority" id="low"
+                                        value="Baixo">Baixo</label>
+                                <label for="medium"><input type="radio" name="priority" id="medium"
+                                        value="Médio">Médio</label>
+                                <label for="high"><input type="radio" name="priority" id="high"
+                                        value="Alto">Alto</label>
                             </fieldset>
                         </section>
                     </dialog>
                 </div>
-                
             </section>
+
+            <!-- To do list -->
             <section id="section-list">
-                <!-- To do list -->
                 <div class="container-buttons">
-                    <button type="button" id="btn-add" aria-label="Adicionar nova tarefa">Adicionar</button>
+                    <button type="button" id="btn-add" aria-label="Adicionar nova tarefa"><i
+                            class="fas fa-plus"></i>Adicionar Tarefa</button>
                 </div>
                 <div class="container-lists">
+                    <div id="empty-state" class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>Nenhuma tarefa ainda</h3>
+                        <p>Clique no botão "Adicionar Tarefa" para começar a organizar suas atividades</p>
+                    </div>
                     <ul id="task-list-ul"></ul>
+                </div>
+            </section>
+
+            <section id="section-guide" class="guide-container">
+                <h3>Como usar</h3>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <i class="fas fa-plus-circle"></i>
+                        <p>Adicione novas tarefas</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-flag"></i>
+                        <p>Defina a prioridade</p>
+                    </div>
+                    <div class="guide-step">
+                        <i class="fas fa-check"></i>
+                        <p>Marque como concluída</p>
+                    </div>
                 </div>
             </section>
         </main>
